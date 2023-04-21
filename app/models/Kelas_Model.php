@@ -1,10 +1,10 @@
 <?php
     class Kelas_Model extends Database{
-        public function uploadTugas( $npm, $idMatkul, $semester, $nomorTugas, $file){
+        public function uploadTugas( $npm, $idmatkul, $semester, $nomorTugas, $file){
             try {
                 $this->query("INSERT INTO tbnilai ( npm, idMatkul, semester, nomorTugas, file)
                 VALUES (?, ?, ?, ? , ?)");
-                $this->bind($npm, $idMatkul, $semester, $nomorTugas, $file);
+                $this->bind($npm, $idmatkul, $semester, $nomorTugas, $file);
                 $this->execute();
                 return true;
             } catch (Exception $err) {
@@ -53,6 +53,32 @@
             GROUP BY npm, idMatkul, semester");
             $this->bind($user, $idmatkul, $semester);
             return $this->resSet();
+        }
+
+        public function editBobot($idmatkul, $semester, $laprak, $responsi, $tubes){
+            try{
+                $this->query("UPDATE tbbobot
+                SET bobot = ?
+                WHERE idMatkul = ? AND semester = ? AND jenis = ?");
+                $this->bind($laprak, $idmatkul, $semester, "Laprak");
+                $this->execute();
+
+                $this->query("UPDATE tbbobot
+                SET bobot = ?
+                WHERE idMatkul = ? AND semester = ? AND jenis = ?");
+                $this->bind($responsi, $idmatkul, $semester, "Responsi");
+                $this->execute();
+
+                $this->query("UPDATE tbbobot
+                SET bobot = ?
+                WHERE idMatkul = ? AND semester = ? AND jenis = ?");
+                $this->bind($tubes, $idmatkul, $semester, "Tubes");
+                $this->execute();
+
+                return true;
+            } catch (Exception $err){
+                return false;
+            }
         }
     }
 ?>

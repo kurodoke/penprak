@@ -47,7 +47,7 @@ async function onload(){
                             elmBuild += `
                             <div class="col">
                                 <label for="bobot-${data['jenis'].toLowerCase()}" class="col-form-label">${data['jenis']}</label>
-                                <input type="text" class="form-control" id="bobot-${data['jenis'].toLowerCase()}" placeholder="${data['bobot']}">
+                                <input type="text" class="form-control" id="bobot-${data['jenis'].toLowerCase()}" placeholder="${data['bobot']}" name="${data['jenis'].toLowerCase()}">
                             </div>`;
                         });
             elmBuild += `

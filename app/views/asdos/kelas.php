@@ -83,7 +83,7 @@
     <div class="modal fade" id="bobotModal" tabindex="-1" role="dialog" aria-labelledby="bobotModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content bobot-modal-custom">
-                <form action="" method="post">
+                <form action="<?= BASE_URL . "/kelas/editbobot/" .join("/", $data)?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="bobotModalLabel">Edit Bobot</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -93,15 +93,15 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="bobot-laprak" class="col-form-label">Laprak</label>
-                                        <input type="text" class="form-control" id="bobot-laprak" placeholder="">
+                                        <input type="text" class="form-control" id="bobot-laprak" placeholder="" name="laprak">
                                     </div>
                                     <div class="col">
                                         <label for="bobot-responsi" class="col-form-label">Responsi</label>
-                                        <input type="text" class="form-control" id="bobot-responsi" placeholder="">
+                                        <input type="text" class="form-control" id="bobot-responsi" placeholder="" name="responsi">
                                     </div>
                                     <div class="col">
                                         <label for="bobot-tubes" class="col-form-label">Tubes</label>
-                                        <input type="text" class="form-control" id="bobot-tubes" placeholder="">
+                                        <input type="text" class="form-control" id="bobot-tubes" placeholder="" name="tubes">
                                     </div>
                                 </div>
                             </div>
