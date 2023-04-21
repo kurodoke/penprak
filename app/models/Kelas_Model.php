@@ -80,5 +80,21 @@
                 return false;
             }
         }
+
+        public function addTugas($idmatkul, $semester, $jenis, $soal){
+            try {
+                $this->query("INSERT INTO tbtugas (idMatkul, semester, nomorTugas, jenis, deskripsi) 
+                VALUES (?, ?, (
+                    SELECT MAX(s.nomorTugas) 
+                    FROM tbtugas s 
+                    WHERE s.idMatkul= ? AND s.semester= ?) + 1, 
+                ?, ?);");
+                $this->bind($idmatkul, $semester, $idmatkul, $semester, $jenis, $soal);
+                $this->execute();
+                return true;
+            } catch (Exception $err){
+                return false;
+            }
+        }
     }
 ?>

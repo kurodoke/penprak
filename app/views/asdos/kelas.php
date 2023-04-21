@@ -142,7 +142,7 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="soal-tugas">Soal</label>
-                                    <textarea class="form-control" id="soal-tugas" rows="3"></textarea>
+                                    <textarea class="form-control" id="soal-tugas" rows="3" name="soal"></textarea>
                                 </div>
                             </div>
                         </div>

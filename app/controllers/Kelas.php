@@ -72,6 +72,23 @@
             }
         }
 
+        //proc
+        public function addtugas(...$data){
+            if($this->auth() && !empty($data)){
+                $model = $this->model("Kelas_Model");
+                if($model->addTugas($data[0], $data[1], $_POST['jenis'], $_POST['soal'])){
+                    Flasher::setFlash("Berhasil", "tambah tugas", "success");
+                    $this->location("kelas/index/" . join("/", $data));
+                } else {
+                    Flasher::setFlash("Error", "Database", "danger");
+                    $this->location("kelas/index/" . join("/", $data));
+                }
+            } else {
+                $this->location("");
+            }
+        }
+
+
         public function download(...$data) {
             header("location: " . BASE_URL_PUB . "/pdf/p.pdf");
         }
