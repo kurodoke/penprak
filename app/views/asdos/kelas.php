@@ -21,7 +21,7 @@
 
             <div class="row mb-3">
                 <div class="col md-3">
-                    <a href="<?= BASE_URL . "/kelas/datamhs/" . join("/", $data) ?>" class="text-decoration-none">
+                    <a href="<?= BASE_URL . "/kelas/mahasiswa/" . join("/", $data) ?>" class="text-decoration-none">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="fas fa-users"></i> Lihat Data Siswa</h5>

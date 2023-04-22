@@ -46,8 +46,12 @@
         }
 
         //view
-        public function datamhs(...$data){
-            var_dump($data);
+        public function mahasiswa(...$data){
+            if($this->auth()){
+                $this->tnview("asdos/mahasiswa", $data);
+            } else {
+                $this->location("");
+            }
         }
 
         //proc
@@ -88,6 +92,44 @@
             }
         }
 
+        //view
+        public function tugas(...$data){
+            if($this->auth()){
+                $this->tnview("asdos/tugas", $data);
+            } else {
+                $this->location("");
+            }
+        }
+        //proc
+        public function deleteTugas(...$data){
+            if ($this->auth()){
+                if(!empty($data)){
+                    $a = 1;
+                }
+            } else {
+                $this->location("");
+            }
+        }
+
+        //proc
+        public function nilai(...$data){
+            if($this->auth() && !empty($data)){
+                if(!empty($_POST)){
+                    $model = $this->model("Kelas_Model");
+                    for($index = 0; $index < count($_POST['npm']); $index++){
+                        if($model->editNilai($_POST['nilai'][$index], $_POST['npm'][$index], $data[0], $data[1], $data[2])){
+                            Flasher::setFlash("Berhasil", "menilai", "success");
+                        } else {
+                            Flasher::setFlash("Error", "database", "danger");
+                            break;
+                        }
+                    }
+                }
+                $this->location("kelas/tugas/". join("/", $data));
+            } else {
+                $this->location("");
+            }
+        }
 
         public function download(...$data) {
             header("location: " . BASE_URL_PUB . "/pdf/p.pdf");

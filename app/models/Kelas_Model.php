@@ -96,5 +96,39 @@
                 return false;
             }
         }
+
+        public function getMhsOnKelas($idmatkul, $semester){
+            $this->query("SELECT k.idMatkul, k.semester, m.npm, m.namaMhs, m.email, m.profileStatus 
+            FROM tbkelas k
+            LEFT JOIN tbmhs m ON k.npm = m.npm
+            WHERE k.idMatkul = ? AND k.semester = ?");
+            $this->bind($idmatkul, $semester);
+            return $this->resSet();
+        }
+
+        public function editNilai($nilai, $npm, $idmatkul, $semester, $nomorTugas){
+            try {
+                $this->query("UPDATE tbnilai
+                SET nilai = ?
+                WHERE npm = ? AND idMatkul = ? AND semester = ? AND nomorTugas = ?");
+                $this->bind($nilai, $npm, $idmatkul, $semester, $nomorTugas);
+                $this->execute();
+                return true;
+            } catch (Exception $err){
+                return false;
+            }
+        }
+
+        public function getTugasAsdos($idmatkul, $semester, $nomorTugas){
+            $this->query("SELECT k.npm, t.idMatkul, t.semester, t.nomorTugas, n.file, n.nilai 
+            FROM tbtugas t 
+                RIGHT JOIN tbkelas k 
+                    ON t.idMatkul = k.idMatkul AND t.semester = k.semester
+                LEFT JOIN tbnilai n 
+                    ON k.npm = n.npm AND n.idMatkul = k.idMatkul AND t.nomorTugas = n.nomorTugas
+            WHERE t.idMatkul = ? AND t.semester = ? AND t.nomorTugas = ?");
+            $this->bind($idmatkul, $semester, $nomorTugas);
+            return $this->resSet();
+        }
     }
 ?>

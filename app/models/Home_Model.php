@@ -1,7 +1,7 @@
 <?php
     class Home_Model extends Database {
         public function getProfile($user){
-            $this->query("SELECT npm, namaMhs, email, alamat, tglLahir, fakultas, prodi FROM tbmhs 
+            $this->query("SELECT npm, namaMhs, email, alamat, tglLahir, fakultas, prodi, profileStatus FROM tbmhs 
             RIGHT JOIN tbfakultas ON idFk = LEFT(npm,1)
             RIGHT JOIN tbprodi ON idProdi = LEFT(npm,3)
             WHERE npm = ?
@@ -10,12 +10,25 @@
             return $this->resSet();
         }
 
-        public function updateProfile($tgl, $email, $alamat, $user){
+        public function editProfile($tgl, $email, $alamat, $user){
             try{
                 $this->query("UPDATE tbmhs
                 SET tglLahir = ?, email = ?, alamat = ?
                 WHERE npm = ?");
                 $this->bind($tgl, $email, $alamat, $user);
+                $this->execute();
+                return true;
+            } catch (Exception $err){
+                return false;
+            }
+        }
+
+        public function editPhoto($user, $profileStatus){
+            try{
+                $this->query("UPDATE tbmhs
+                SET profileStatus = ?
+                WHERE npm = ?");
+                $this->bind($profileStatus, $user);
                 $this->execute();
                 return true;
             } catch (Exception $err){

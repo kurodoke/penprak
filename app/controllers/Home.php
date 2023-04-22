@@ -1,26 +1,36 @@
 <?php
     class Home extends Controller {
         //proc
-        public function profile(){
-            $model = $this->model("Home_Model");
-            $tgl = ($_POST['tglLahir'] == "") ? null : $_POST['tglLahir'];
-            $email = ($_POST['email'] == "") ? null : $_POST['email'];
-            $alamat = ($_POST['alamat'] == "") ? null : $_POST['alamat'];
-            $user = $_SESSION['user'];
-            if($model->updateProfile($tgl, $email, $alamat, $user)){
-                if (!empty($_FILES['fileImg'])){
-                    if ($_FILES['fileImg']['type'] == "image/jpeg"){
-                        move_uploaded_file($_FILES['fileImg']['tmp_name'], "./public/img/profile/" . $user . ".jpg");
-                    } else {
-                        Flasher::setFlash("Image", "gagal", "danger");
-                    }
+        public function editProfile(){
+            if ($this->auth()) {
+                $model = $this->model("Home_Model");
+                $tgl = ($_POST['tglLahir'] == "") ? null : $_POST['tglLahir'];
+                $email = ($_POST['email'] == "") ? null : $_POST['email'];
+                $alamat = ($_POST['alamat'] == "") ? null : $_POST['alamat'];
+                $user = $_SESSION['user'];
+
+                if($model->editProfile($tgl, $email, $alamat, $user)){
+                    Flasher::setFlash("Update", "berhasil", "success");
+                } else {
+                    Flasher::setFlash("Error", "Database", "danger");
                 }
-                Flasher::setFlash("Update", "berhasil", "success");
+
+                if ($_FILES['fileImg']['type'] == "image/jpeg" || $_FILES['fileImg']['type'] == "image/png"){
+                    if(move_uploaded_file($_FILES['fileImg']['tmp_name'], "./public/img/profile/" . $user . ".jpg")){
+                        if($model->editPhoto($user, 1)){
+                            Flasher::setFlash("Update", "berhasil", "success");
+                        } else {
+                            Flasher::setFlash("Error", "Database", "danger");
+                        }
+                    } else {
+                        Flasher::setFlash("Error", "Image upload gagal", "danger");
+                    }
+                } else {
+                    Flasher::setFlash("Error", "upload jpg atau png saja", "danger");
+                }
                 $this->location("home");
-            }
-            else {
-                Flasher::setFlash("Update", "gagal", "danger");
-                $this->location("home");
+            } else {
+                $this->location("");
             }
         }
 
@@ -37,7 +47,7 @@
 
         //view
         public function mahasiswa(...$data) {
-            if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['role'] == "mahasiswa"){
+            if($this->auth() && $_SESSION['role'] == "mahasiswa"){
                 $this->tnview("mahasiswa/index", $data);
             } else {
                 $this->location("");
@@ -45,7 +55,7 @@
         }
 
         public function asdos(...$data) {
-            if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['role'] == "asdos"){
+            if($this->auth() && $_SESSION['role'] == "asdos"){
                 $this->tnview("asdos/index", $data);
             } else {
                 $this->location("");
@@ -53,7 +63,7 @@
         }
         
         public function admin(...$data) {
-            if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['role'] == "admin"){
+            if($this->auth() && $_SESSION['role'] == "admin"){
                 $this->tnview("admin/index", $data);
             } else {
                 $this->location("");

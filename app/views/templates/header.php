@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/all.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/navbar.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/kelas.card.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/kelas.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/loading.css">
     <title>Document</title>
 </head>

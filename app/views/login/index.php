@@ -3,7 +3,10 @@
     // 2. session 
     // 1. login view model login
 ?>
-<?= Flasher::flash() ?>
+<div class="position-absolute top-0" style="width: 100vw;">
+    <?= Flasher::flash() ?>
+</div>
+
 <div class="container-fluid">
     <div class="row justify-content-center" style="height: 100vh;">
         <div class="col-4 m-auto">

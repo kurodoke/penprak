@@ -1,5 +1,5 @@
 <!-- Modal profile navbar -->
-<form action="<?= BASE_URL. "/home/profile"?>" method="post" enctype="multipart/form-data">
+<form action="<?= BASE_URL. "/home/editProfile"?>" method="post" enctype="multipart/form-data">
     <div class="modal fade modal-xl" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -89,7 +89,6 @@
     <!-- script profile modal --> 
     <script>
         var base_url = "<?= BASE_URL?>";
-        var base_url_pub = "<?= BASE_URL_PUB?>";
     </script>
 
     <script src="<?= BASE_URL_PUB. "/js/custom/profile.js" ?>"></script>
