@@ -12,7 +12,8 @@ async function onload(){
         .then( (result) => {
             let elm = document.querySelector(".tugas-custom");
             let elmBuild = ``;
-            result.forEach(data => {
+            if( result["status"] != "err"){
+                result.forEach(data => {
                 elmBuild += `
             <a href="${base_url + "/kelas/tugas/" + params.join("/") + "/" + data["nomorTugas"]}" class="text-decoration-none">
                 <div class="card mb-3">
@@ -25,7 +26,8 @@ async function onload(){
                     </div>
                 </div>
             </a>`;
-            })
+                })
+            }
             elm.innerHTML = elmBuild;
         })
 
@@ -61,4 +63,7 @@ async function onload(){
             </form>`;
             elm.innerHTML = elmBuild;
         })
+    
+        document.querySelector(".loading").style.display = "none";
+    
 }

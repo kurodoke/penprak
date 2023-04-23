@@ -22,7 +22,7 @@
                 if (!empty($_FILES)){
                     $arrFile = explode(".", $_FILES["fileTugas"]['name']);
                     $type = $arrFile[count($arrFile)-1];
-                    $filename = $_SESSION["user"] . "_" . $data[0] . "_" . $data[1] . "_" . $_POST['nomorTugas'] . ".pdf";
+                    $filename = $_SESSION["user"] . "_" . $data[0] . "_" . $data[1] . "_" . $this->generateRandom() . ".pdf";
                     if($type == "pdf"){
                         if(move_uploaded_file($_FILES["fileTugas"]['tmp_name'], "./public/pdf/" . $filename)){
                             if($model->uploadTugas($_SESSION["user"], $data[0], $data[1], $_POST['nomorTugas'],  $filename)){
@@ -100,16 +100,6 @@
                 $this->location("");
             }
         }
-        //proc
-        public function deleteTugas(...$data){
-            if ($this->auth()){
-                if(!empty($data)){
-                    $a = 1;
-                }
-            } else {
-                $this->location("");
-            }
-        }
 
         //proc
         public function nilai(...$data){
@@ -131,8 +121,30 @@
             }
         }
 
-        public function download(...$data) {
-            header("location: " . BASE_URL_PUB . "/pdf/p.pdf");
+        //proc
+        public function deleteTugas(...$data){
+            if($this->auth() && !empty($data[2])){
+                $model = $this->model("Kelas_Model");
+                if ($model->deleteTugasAsdos($data[0], $data[1], $data[2])){
+                    Flasher::setFlash("Berhasil", "Hapus tugas", "success");
+                } else {
+                    Flasher::setFlash("Error", "Database", "danger");
+                }
+                $this->location("kelas/index/" . join("/", array($data[0], $data[1])));
+            } else {
+                $this->location("");
+            }
+        }
+
+        //view
+        public function rekap(...$data){
+            if ($this->auth() && $_SESSION['role'] == "asdos" && !empty($data[1])) {
+                $model = $this->model("Rekap_Model");
+                $send = array($model, $data);
+                $this->tview("asdos/rekap", $send);
+            } else {
+                $this->location("");
+            }
         }
     }
 ?>

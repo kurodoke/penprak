@@ -6,13 +6,15 @@ async function onload(){
         .then(async function(result) {
             let elm = document.querySelector(".row-custom");
             let elmBuild = ``;
-            for(let i = 0; i < result.length; i++){
-				let namaAsdos = [];
-				if (result[i].asdos[1]){
-					namaAsdos.push(await dataAsdos(result[i].asdos[1]));
+            if( result["status"] != "err"){
+				for(let i = 0; i < result.length; i++){
+						  let namaAsdos = [];
+					if (result[i].asdos[1]){
+						namaAsdos.push(await dataAsdos(result[i].asdos[1]));
+					}
+					namaAsdos.push(await dataAsdos(result[i].asdos[0]));
+					elmBuild += updateCard(result[i].matkul, namaAsdos, result[i].idMatkul, result[i].semester);
 				}
-                namaAsdos.push(await dataAsdos(result[i].asdos[0]));
-                elmBuild += updateCard(result[i].matkul, namaAsdos, result[i].idMatkul, result[i].semester);
             }
             document.querySelector(".loading").style.display = "none";
             elm.innerHTML = elmBuild;

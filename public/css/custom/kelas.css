@@ -14,6 +14,10 @@
     aspect-ratio: 1/1;
 }
 
+.hidden-elm{
+    display: none;
+}
+
 .banner-background-1{
     background-image: radial-gradient( circle 311px at 8.6% 27.9%,  rgba(62,147,252,0.57) 12.9%, rgba(239,183,192,0.44) 91.2% );
 }

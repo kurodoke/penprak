@@ -87,9 +87,6 @@
     <!-- modal file upload -->
 </form>
     <!-- script profile modal --> 
-    <script>
-        var base_url = "<?= BASE_URL?>";
-    </script>
 
     <script src="<?= BASE_URL_PUB. "/js/custom/profile.js" ?>"></script>
     <!-- script profile modal -->

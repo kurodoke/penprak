@@ -1,3 +1,7 @@
+<div class="loading">
+    <div class="loader"></div>
+</div>
+
 <div class="container-fluid">
     <div class="row m-3 justify-content-between">
         <div class="col-3">

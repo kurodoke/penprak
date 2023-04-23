@@ -85,7 +85,7 @@
             try {
                 $this->query("INSERT INTO tbtugas (idMatkul, semester, nomorTugas, jenis, deskripsi) 
                 VALUES (?, ?, (
-                    SELECT MAX(s.nomorTugas) 
+                    SELECT IFNULL(MAX(s.nomorTugas), 0) 
                     FROM tbtugas s 
                     WHERE s.idMatkul= ? AND s.semester= ?) + 1, 
                 ?, ?);");
@@ -129,6 +129,34 @@
             WHERE t.idMatkul = ? AND t.semester = ? AND t.nomorTugas = ?");
             $this->bind($idmatkul, $semester, $nomorTugas);
             return $this->resSet();
+        }
+
+        public function deleteTugasAsdos($idmatkul, $semester, $nomorTugas){
+            try{
+                //hapus yang di tb nilai dulu
+                $this->query("DELETE FROM tbnilai WHERE idMatkul = ? AND semester = ? AND nomorTugas = ? OR nomorTugas = '0'");
+                $this->bind($idmatkul, $semester, $nomorTugas);
+                $this->execute();
+
+                $this->query("UPDATE tbnilai SET nomorTugas = nomorTugas - 1
+                WHERE idMatkul = ? AND semester = ? AND nomorTugas > ?");
+                $this->bind($idmatkul, $semester, $nomorTugas);
+                $this->execute();
+
+                //trus tbtugas
+                $this->query("DELETE FROM tbtugas WHERE idMatkul = ? AND semester = ? AND nomorTugas = ?");
+                $this->bind($idmatkul, $semester, $nomorTugas);
+                $this->execute();
+
+                $this->query("UPDATE tbtugas SET nomorTugas = nomorTugas - 1
+                WHERE idMatkul = ? AND semester = ? AND nomorTugas > ?");
+                $this->bind($idmatkul, $semester, $nomorTugas);
+                $this->execute();
+
+                return true;
+            } catch (Exception $err){
+                return false;
+            }
         }
     }
 ?>

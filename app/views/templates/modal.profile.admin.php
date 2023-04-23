@@ -18,8 +18,4 @@
 </form>
 
 <!-- script profile modal --> 
-    <script>
-        var base_url = "<?= BASE_URL?>";
-        var base_url_pub = "<?= BASE_URL_PUB?>";
-    </script>
 <!-- script profile modal --> 

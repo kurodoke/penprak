@@ -2,6 +2,10 @@
     Flasher::flash();
 ?>
 
+<div class="loading">
+    <div class="loader"></div>
+</div>
+
 <div class="container-fluid">
     <div class="row m-3 justify-content-between">
         <div class="col-3">
@@ -41,13 +45,31 @@
 
         <div class="row m-3 justify-content-between">
             <div class="col-3">  
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmHapusModal">Hapus tugas</button>
+                <button type="button" class="btn btn-danger hidden-elm" data-bs-toggle="modal" data-bs-target="#confirmHapusModal">Hapus tugas</button>
             </div>
             <div class="col-3">
-                <button type="submit" class="btn btn-primary float-end">Input nilai</button>
+                <button type="submit" class="btn btn-primary float-end hidden-elm">Input nilai</button>
             </div>
         </div>
     </form>
+</div>
+
+<div class="modal fade" tabindex="-1" id="confirmHapusModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Kamu yakin mau hapus tugas ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Gak jadi</button>
+                <a href="<?= BASE_URL . "/kelas/deletetugas/" . join("/", $data)?>" class="btn btn-danger">Gas</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="<?= BASE_URL_PUB . "/js/custom/kelas.tugas.asdos.js" ?>"></script>

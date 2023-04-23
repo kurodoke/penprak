@@ -53,36 +53,38 @@ async function onload(){
         .then( (result) => {
             let elm = document.querySelector(".tugas-custom");
             let elmBuild = ``;
-            result.forEach(data => {
-                elmBuild += `
-                <div class="card mb-3">
-                <form action="${base_url + "/kelas/upload/" + params.join("/")}" method="post" enctype="multipart/form-data">
-                    <div class="card-header">${data['jenis']}</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Tugas ke-${data['nomorTugas']}</h5>
-                        <p class="card-text mb-2" style="white-space: pre-line;">${data['deskripsi']}</p>`
-                    if (data['file'] == null){
-                        elmBuild += `
-                        <label for="inputTugas" class="form-label">Upload tugas kamu</label>
-                        <input class="form-control" type="file" id="inputTugas" name="fileTugas">
-                        <button type="submit" class="btn btn-primary mt-3" name="submit-tugas">Submit Tugas</button>`;
-                    } else {
-                        if(data['nilai'] == null){
-                            elmBuild += `
-                            <blockquote class="blockquote mb-0"> kamu sudah kumpul tugas!!
-                                <footer class="blockquote-footer mt-1">tunggu ajaa... nanti dinilai</footer>
-                            </blockquote>`;
-                        } else {
-                            elmBuild += `
-                            <blockquote class="blockquote mb-0"> Nilai kamu ${data['nilai']}</blockquote>`;
-                        }
-                    }
+            if( result["status"] != "err"){
+                result.forEach(data => {
                     elmBuild += `
-                        <input type="hidden" value="${data['nomorTugas']}" name="nomorTugas">
-                    </div>
-                </form>
-                </div>`;
-            })
+                    <div class="card mb-3">
+                    <form action="${base_url + "/kelas/upload/" + params.join("/")}" method="post" enctype="multipart/form-data">
+                        <div class="card-header">${data['jenis']}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Tugas ke-${data['nomorTugas']}</h5>
+                            <p class="card-text mb-2" style="white-space: pre-line;">${data['deskripsi']}</p>`
+                        if (data['file'] == null){
+                            elmBuild += `
+                            <label for="inputTugas" class="form-label">Upload tugas kamu</label>
+                            <input class="form-control" type="file" id="inputTugas" name="fileTugas">
+                            <button type="submit" class="btn btn-primary mt-3" name="submit-tugas">Submit Tugas</button>`;
+                        } else {
+                            if(data['nilai'] == null){
+                                elmBuild += `
+                                <blockquote class="blockquote mb-0"> kamu sudah kumpul tugas!!
+                                    <footer class="blockquote-footer mt-1">tunggu ajaa... nanti dinilai</footer>
+                                </blockquote>`;
+                            } else {
+                                elmBuild += `
+                                <blockquote class="blockquote mb-0"> Nilai kamu ${data['nilai']}</blockquote>`;
+                            }
+                        }
+                        elmBuild += `
+                            <input type="hidden" value="${data['nomorTugas']}" name="nomorTugas">
+                        </div>
+                    </form>
+                    </div>`;
+                })
+            }
             elm.innerHTML = elmBuild;
         })
     document.querySelector(".loading").style.display = "none";

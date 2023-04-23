@@ -2,6 +2,10 @@
     Flasher::flash();
 ?>
 
+<div class="loading">
+    <div class="loader"></div>
+</div>
+
 
 <div class="container">
     <div class="row">

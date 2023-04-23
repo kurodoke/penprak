@@ -6,8 +6,10 @@ async function onload(){
         .then(async function(result) {
             let elm = document.querySelector(".row-custom");
             let elmBuild = ``;
-            for(let i = 0; i < result.length; i++){
-                elmBuild += updateCard(result[i].matkul, result[i].idMatkul, result[i].semester);
+            if( result["status"] != "err"){
+              for(let i = 0; i < result.length; i++){
+                  elmBuild += updateCard(result[i].matkul, result[i].idMatkul, result[i].semester);
+              }
             }
             document.querySelector(".loading").style.display = "none";
             elm.innerHTML = elmBuild;
