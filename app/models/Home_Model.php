@@ -39,7 +39,7 @@
         public function kelasMhs($user){
             $this->query("SELECT tbkelas.npm AS npm, matkul, tbampu.npm AS asdos, tbmhs.namaMhs AS nama, tbkelas.idMatkul AS idMatkul ,tbkelas.semester AS semester FROM tbkelas 
                 RIGHT JOIN tbmatkul ON tbkelas.idMatkul = tbmatkul.idMatkul
-                RIGHT JOIN tbampu ON tbkelas.idMatkul = tbampu.idMatkul
+                LEFT JOIN tbampu ON tbkelas.idMatkul = tbampu.idMatkul
                 RIGHT JOIN tbmhs ON tbkelas.npm = tbmhs.npm
             WHERE tbkelas.npm = ?
             ORDER BY idMatkul, semester");

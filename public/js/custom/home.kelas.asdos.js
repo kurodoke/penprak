@@ -22,11 +22,11 @@ function updateCard(matkul, idmatkul, semester){
 <div class="col-md-4 card-kelas">
     <div class="card mb-4 kelas-custom">
       <div class="banner-kelas banner-background-${index}"></div>
-      <div class="card-body">
-        <h4 class="card-title">${matkul}</h4>
-        <p class="card-subtitle mb-2 text-body-secondary">Aku</p>
-        <a href="${base_url + "/kelas/index/" +idmatkul + "/" + semester}" class="btn btn-primary mt-4 ">Masuk kelas</a>
-      </div>
+		<div class="card-body">
+			<h4 class="card-title">${matkul}</h4>
+			<p class="card-subtitle mb-2 text-body-secondary">Aku</p>
+			<a href="${base_url + "/kelas/index/" +idmatkul + "/" + semester}" class="btn btn-primary mt-4 ">Masuk kelas</a>
+		</div>
     </div>
   </div>`
 }

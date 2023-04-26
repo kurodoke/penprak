@@ -279,6 +279,50 @@
                 $this->location("");
             }
         }
+
+        //api
+        public function getAllMhs(...$data){
+            if ($this->auth() && !empty($data[1])){
+                $model = $this->model("Admin_Model");
+                $json = [];
+                $query = $model->getAllMhs($data[0], $data[1]);
+                while( $res = $query->fetch_assoc()){
+                    array_push($json, $res);
+                }
+
+                if (empty($json)){
+                    $json = array(
+                        "status" => "err",
+                        "msg" => "no data found"
+                    );
+                }
+                echo json_encode($json);
+            } else {
+                $this->location("");
+            }
+        }
+
+        //api
+        public function getSimpleAllMhs(...$data){
+            if ($this->auth()){
+                $model = $this->model("Admin_Model");
+                $json = [];
+                $query = $model->getSimpleAllMhs();
+                while( $res = $query->fetch_assoc()){
+                    array_push($json, $res);
+                }
+
+                if (empty($json)){
+                    $json = array(
+                        "status" => "err",
+                        "msg" => "no data found"
+                    );
+                }
+                echo json_encode($json);
+            } else {
+                $this->location("");
+            }
+        }
     }
 
 ?>

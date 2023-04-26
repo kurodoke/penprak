@@ -61,5 +61,76 @@
             }
         }
         
+        //proc
+        public function editMatkul(...$data){
+            if($this->auth() && $_SESSION["role"] == "admin" && !empty($data[1])){
+                $model = $this->model("Admin_Model");
+                for($index = 0; $index < count($_POST['npm']); $index++ ){
+                    if($_POST['status'][$index] == "Mahasiswa"){
+                        if($model->addMhsToKelas($_POST['npm'][$index], $data[0], $data[1])){
+                        } else {
+                            Flasher::setFlash("Error", "Database", "danger");
+                            break;
+                        }
+                    } else if ($_POST['status'][$index] == "Asisten Dosen"){
+                        if($model->addMhsToAmpu($_POST['npm'][$index], $data[0], $data[1])){
+                        } else {
+                            Flasher::setFlash("Error", "Database", "danger");
+                            break;
+                        }
+                    } else if ($_POST['status'][$index] == ""){
+                        if($model->delMhsFromKelas($_POST['npm'][$index], $data[0], $data[1])){
+                        } else {
+                            Flasher::setFlash("Error", "Database", "danger");
+                            break;
+                        }
+                    }
+                    Flasher::setFlash("Berhasil", "Edit Matkul", "success");
+                }
+                $a = 1;
+                $this->location("admin/matkul/" . join("/", $data));
+            } else {
+                $this->location("");
+            }
+        }
+
+        //proc
+        public function delMatkul(...$data){
+            if($this->auth() && $_SESSION["role"] == "admin" && !empty($data[1])){
+                $model = $this->model("Admin_Model");
+                if($model->delMatkul($data[0], $data[1])){
+                    Flasher::setFlash("Berhasil", "Hapus Matkul", "success");
+                } else {
+                    Flasher::setFlash("Error", "Database", "danger");
+                }
+                $this->location("home");
+            } else {
+                $this->location("");
+            }
+        }
+
+        //view
+        public function mahasiswa(...$data){
+            if($this->auth() && $_SESSION["role"] == "admin"){
+                $this->tnview("admin/mahasiswa");
+            } else {
+                $this->location("");
+            }
+        }
+
+        //proc
+        public function delMhs(...$data){
+            if($this->auth() && $_SESSION["role"] == "admin" && !empty($data[0])){
+                $model = $this->model("Admin_Model");
+                if($model->delMhs($data[0])){
+                    Flasher::setFlash("Berhasil", "Hapus Mahasiswa", "success");
+                } else {
+                    Flasher::setFlash("Error", "Database", "danger");
+                }
+                $this->location("admin/mahasiswa");
+            } else {
+                $this->location("");
+            }
+        }
     }
 ?>

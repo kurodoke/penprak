@@ -17,7 +17,7 @@
 
 <div class="container" id="container-hidden" style="visibility: hidden;">
     <div class="row mt-3">
-        <div class="col">
+        <div class="col-3">
             <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#mhsModal">
                 <div class="card">
                     <div class="card-body">
@@ -26,8 +26,17 @@
                 </div>
             </a>
         </div>
+        <div class="col-3">
+            <a href="<?= BASE_URL . "/admin/mahasiswa" ?>" class="text-decoration-none">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Edit Mahasiswa</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
         
-        <div class="col">
+        <div class="col-6">
             <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#matkulModal">
                 <div class="card">
                     <div class="card-body">
@@ -41,7 +50,7 @@
     <div class="row mt-3">
         <div class="col">
             <h3>List Matkul</h3>
-            <input type="text" id="search-mhs" class="form-control" onkeyup="searchMhs()" placeholder="Id Matkul...">
+            <input type="text" id="search-mhs" class="form-control" onkeyup="searchMatkul()" placeholder="Id Matkul...">
             <p class="text-secondary mx-2">cari matkul menggunakan search ajaib ini</p>
 
             <table class="table table-mhs">

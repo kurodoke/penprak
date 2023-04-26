@@ -53,5 +53,25 @@
             }
             $this->tview("login/index");
         }
+
+        //view
+        public function editPass(){
+            $this->tview("login/editpass");
+        }
+
+        //proc
+        public function pass(){
+            $model = $this->model("Login_Model");
+            if($model->getMhs($_POST['user'], $_POST['passLama'])->fetch_assoc()){
+                if($model->editPass($_POST['user'], $_POST['passLama'], $_POST['passBaru'])){
+                    Flasher::setFlash("Berhasil", "ganti password", "success");
+                } else {
+                    Flasher::setFlash("Error", "Database", "danger");
+                }
+            } else {
+                Flasher::setFlash("Error", "User dan Password Salah", "danger");
+            }
+            $this->location("");
+        }
     }
 ?>

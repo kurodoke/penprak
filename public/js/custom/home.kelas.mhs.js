@@ -8,7 +8,7 @@ async function onload(){
             let elmBuild = ``;
             if( result["status"] != "err"){
 				for(let i = 0; i < result.length; i++){
-						  let namaAsdos = [];
+					let namaAsdos = [];
 					if (result[i].asdos[1]){
 						namaAsdos.push(await dataAsdos(result[i].asdos[1]));
 					}
@@ -32,12 +32,12 @@ function updateCard(matkul, asdos, idmatkul, semester){
     return `
 <div class="col-md-4 card-kelas">
     <div class="card mb-4 kelas-custom">
-      <div class="banner-kelas banner-background-${index}"></div>
-      <div class="card-body">
-        <h4 class="card-title">${matkul}</h4>
-        <p class="card-subtitle mb-2 text-body-secondary">${asdos[0]} ${(asdos[1]) ? "dan " + asdos[1] : ""}</p>
-        <a href="${base_url + "/kelas/index/" +idmatkul + "/" + semester}" class="btn btn-primary mt-4 ">Masuk kelas</a>
-      </div>
+		<div class="banner-kelas banner-background-${index}"></div>
+		<div class="card-body">
+			<h4 class="card-title">${matkul}</h4>
+			<p class="card-subtitle mb-2 text-body-secondary">${asdos[0]} ${(asdos[1]) ? "dan " + asdos[1] : ""}</p>
+			<a href="${base_url + "/kelas/index/" +idmatkul + "/" + semester}" class="btn btn-primary mt-4 ">Masuk kelas</a>
+		</div>
     </div>
   </div>`
 }

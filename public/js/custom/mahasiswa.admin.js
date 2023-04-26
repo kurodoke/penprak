@@ -1,26 +1,22 @@
 onload();
 
 async function onload(){
-	let path = "/penprak/home/"
-    let currentURL = window.location.pathname;
-    let params = currentURL.replace(path, "");
-    params = params.split("/");
-
-	console.log(params);
-
-	await fetch(base_url + "/api/listmatkul/")
+	await fetch(base_url + "/api/getsimpleallmhs" )
 		.then( res => res.json())
 		.then( (result) => {
 			let elm = document.querySelector(".tbody-custom");
 			let elmBuild = ``;
 			for(let i = 0; i < result.length; i++){
-				elmBuild += `<tr class="event-pointer" onclick="location.href = '${base_url}/admin/matkul/${result[i]["idMatkul"]}/${result[i]["semester"]}'">
-				<td>${result[i]["idMatkul"]}</td>
-				<td>${result[i]["matkul"]}</td>
-				<td>${result[i]["semester"]}</td>
-			</tr>`
+				elmBuild += `
+                <tr>
+                    <td>${result[i]["npm"]}</td>
+                    <td>${result[i]["namaMhs"]}</td>
+                    <td>
+                        <a href="${base_url + "/admin/delmhs/" + result[i]["npm"]}" class="btn btn-danger btn-sm">Hapus</a>
+                    </td>
+                </tr>`
+                
 			}
-
 			document.querySelector("#container-hidden").style.visibility = "visible";
 			document.querySelector(".loader").style.display = "none";
 			elm.innerHTML = elmBuild;
@@ -28,8 +24,7 @@ async function onload(){
 }
 
 
-
-function searchMatkul() {
+function searchMhs() {
 	var input, filter, table, tr, td, i, txtValue;
 	input = document.getElementById("search-mhs");
 	filter = input.value.toUpperCase();

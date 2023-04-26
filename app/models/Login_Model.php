@@ -12,5 +12,19 @@
             $this->bind($user, $pass);
             return $this->resSet();
         }
+
+        public function editPass($user, $passLama, $passBaru){
+            try {
+                $this->query("UPDATE tblogin
+                SET pass = SHA2(?, 256)
+                WHERE npm = ? AND pass = SHA2(?, 256);");
+                $this->bind($passBaru, $user, $passLama);
+                $this->execute();
+                return true;
+            } catch (Exception $err) {
+                return false;
+            }
+
+        }
     }
 ?>
