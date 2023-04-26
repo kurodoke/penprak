@@ -108,7 +108,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="password" class="col-form-label">Password</label>
-                                <input type="text" id="password" class="form-control" name="pass" value="admin" readonly>
+                                <input type="text" id="password" class="form-control" name="pass" value="user" readonly>
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="<?= BASE_URL . "/home" ?>">
-			<i class="fab fa-github fa-2x mx-3 ps-1"></i>
+			<h5 class="m-auto" style="color : #6D9886">Pen<span style="color : #F6F6F6">Prak</span></h5>
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 		data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
