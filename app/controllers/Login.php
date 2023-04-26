@@ -17,12 +17,12 @@
                 if ($res = $model->getAdmin($_POST['user'], $_POST['pass'])->fetch_assoc()){
                     $_SESSION["user"] = $res["user"];
                     $_SESSION["role"] = "admin";
-                    $this->location("home/" . $_SESSION["role"]);
+                    $this->location("home");
                 } else if ($res = $model->getMhs($_POST['user'], $_POST['pass'])->fetch_assoc()){
                     $_SESSION["user"] = $res["user"];
                     if ($res["role"] == "Mahasiswa"){
                         $_SESSION["role"] = "mahasiswa";
-                        $this->location("home/". $_SESSION["role"]);
+                        $this->location("home");
                     } else {
                         $_SESSION["role"] = "asdos";
                         $this->location("login/role");

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/navbar.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/kelas.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/loading.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL_PUB ?>/css/custom/admin.css">
     <script>
         var base_url = "<?= BASE_URL?>";
     </script>

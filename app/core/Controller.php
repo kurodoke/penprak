@@ -31,7 +31,7 @@
 
         public function tnview($view, $data = [], $hdata = [], $fdata = [], $ndata = []){
             $this->view("templates/header", $hdata);
-            $this->view("templates/navbar.". $_SESSION['role'], $ndata);
+            $this->view("templates/navbar", $ndata);
             $this->view("templates/modal.profile." . (($_SESSION['role'] == "admin") ? "admin" : "all"), $ndata);
             $this->view($view, $data);
             $this->view("templates/footer", $fdata);

@@ -1,6 +1,6 @@
 <?php
     class Api extends Controller {
-    
+        //universal api
         //api
         public function profile(...$data){
             if ($this->auth()){
@@ -31,6 +31,7 @@
             }
         }
 
+        //api mahasiswa
         //api
         public function kelasMhs(...$data){
             if ($this->auth()){
@@ -180,6 +181,7 @@
             }
         }
 
+        //api asdos
         //api
         public function kelasAsdos(...$data){
             if($this->auth() && $_SESSION['role'] == "asdos"){
@@ -207,6 +209,7 @@
             }
         }
 
+        //api
         public function mahasiswa(...$data){
             if ($this->auth()){
                 $model = $this->model("Kelas_Model");
@@ -232,6 +235,7 @@
             }
         }
 
+        //api
         public function tugasAsdos(...$data){
             if($this->auth() && !empty($data[2])){
                 $model = $this->model("Kelas_Model");
@@ -252,5 +256,29 @@
                 $this->location("");
             }
         }
+        
+        //api admin
+        //api
+        public function listMatkul(...$data){
+            if ($this->auth()){
+                $model = $this->model("Admin_Model");
+                $json = [];
+                $query = $model->getMatkul();
+                while( $res = $query->fetch_assoc()){
+                    array_push($json, $res);
+                }
+
+                if (empty($json)){
+                    $json = array(
+                        "status" => "err",
+                        "msg" => "no data found"
+                    );
+                }
+                echo json_encode($json);
+            } else {
+                $this->location("");
+            }
+        }
     }
+
 ?>
