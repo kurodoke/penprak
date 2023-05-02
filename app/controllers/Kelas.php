@@ -106,7 +106,7 @@
             if($this->auth() && !empty($data)){
                 if(!empty($_POST)){
                     $model = $this->model("Kelas_Model");
-                    for($index = 0; $index < count($_POST['npm']); $index++){
+                    for($index = 1; $index <= count($_POST['npm']); $index++){
                         if($model->editNilai($_POST['nilai'][$index], $_POST['npm'][$index], $data[0], $data[1], $data[2])){
                             Flasher::setFlash("Berhasil", "menilai", "success");
                         } else {
