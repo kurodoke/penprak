@@ -57,5 +57,9 @@
             $res = $this->stmt->get_result();
             return $res;
         }
+
+        public function errno(){
+            return $this->db->errno;
+        }
     }
 ?>

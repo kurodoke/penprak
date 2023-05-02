@@ -26,6 +26,8 @@
                 $npm = $this->npmBuild($_POST['jurusan'], $_POST['angkatan'], $_POST['nomor']);
                 if ($model->addMhs($npm, $_POST['nama'], $_POST['pass'])){
                     Flasher::setFlash("Berhasil", "Tambah mahasiswa", "success");
+                } else if ($model->errno() == 1062) {
+                    Flasher::setFlash("Error", "Data Sudah ada", "danger");
                 } else {
                     Flasher::setFlash("Error", "Database", "danger");
                 }
@@ -43,6 +45,8 @@
                 "0" . $_POST['tahun'] : $_POST['tahun'];
                 if ($model->addMatkul(strtoupper($_POST['idmatkul']), $_POST['nama'], $_POST['semester']. "-20" . $tahun)){
                     Flasher::setFlash("Berhasil", "Tambah Matkul", "success");
+                } else if ($model->errno() == 1062) {
+                    Flasher::setFlash("Error", "Data Sudah ada", "danger");
                 } else {
                     Flasher::setFlash("Error", "Database", "danger");
                 }
