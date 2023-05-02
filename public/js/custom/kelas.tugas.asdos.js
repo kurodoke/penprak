@@ -22,6 +22,7 @@ async function onload() {
                         <a href="${base_url + "/public/pdf/" + data['file']}" class="text-decoration-none text-secondary"><i class="fa-solid fa-circle-check text-success"></i> Lihat Tugas~</a>`;
                     } else {
                         temp = `
+                        <input type="hidden" name="npm[${index}]" value="${data['npm']}">
                         <p class="card-text text-secondary"><i class="fa-solid fa-circle-xmark text-danger"></i> Belum Mengumpulkan</p>
                         `;
                         status = `disabled`;
